@@ -1,0 +1,42 @@
+<%  @feed = $twitter.user_timeline(params[:name]) 
+	@feed = @feed.shuffle %>
+<% @feed.delete_if {|tweet| !tweet.media? } %>
+<div class= 'panel panel-heading'>
+<h1> Slideshow for: <%= link_to $twitter.user(params[:name]).name, $twitter.user(params[:name]).url.to_s %> 
+</h1> <br>
+</div>
+
+<div class="owl-carousel">
+	<% @feed.each do |tweet| %>
+	<center>
+		<div>
+			<%= image_tag(tweet.media[0].media_url) %>
+		</div>
+	</center>
+	<%end%>
+</div>
+
+<script>
+	$(".owl-carousel").owlCarousel({
+		navigation : true,
+		paginationSpeed : 400,
+		autoPlay: 3000,
+		slideSpeed : 300,
+		singleItem: true,
+		autoHeight: true,
+		goToFirstSpeed : 300
+	});
+</script>
+
+
+<!-- <div id="carousel" class="carousel">
+  <div class="carousel-inner">  
+    <div class="item active">
+    	<% @feed.each do |tweet| %>
+    	<%= image_tag(tweet.media[0].media_url) if (tweet.media.present?) %>
+
+    	<%end%>
+    <div class="carousel-caption"></div>
+  </div> 
+</div> -->
+

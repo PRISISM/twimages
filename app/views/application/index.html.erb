@@ -1,0 +1,36 @@
+<div class ="container-fluid">
+	<h1>Twimages</h1>
+	<h2>Your Twitter Slideshow</h2>
+</div>
+<div class="jumbotron">
+	<h2> Enter a Twitter handle: </h2>
+	<%= form_tag new_application_path, :method=>'post' do %>
+		<%= text_field_tag :name ,nil, class: 'form-control', placeholder: "@CoolBoxArt" %><br>
+		<center><%= submit_tag "Submit", class:'btn btn-info'%></center>
+
+	<% end %>
+</div>
+
+<div class="container">
+	<div class = "row">
+		<div class="col-md-6">
+			<h3>About</h3><hr>
+			<p>Twimages is a Rails web app designed to provide an aesthetically pleasing slideshow interface to view Twitter photos. It utilizes the <code>twitter</code> gem to fetch user timelines and present media format Tweets using <code>owlcarousel</code>.
+			</p>
+		</div>
+
+		<div class="col-md-6">
+			<h3>Links</h3><hr>
+			<p>If you have any questions about this, feel free to message me at one of the following links:
+			</p>
+			<div class = "list-group">
+				<a href='https://github.com/toashel' class="list-group-item">
+				<i class="fa fa-github"></i> Github Profile</a>
+
+				<a href='https://twitter.com/toashel' class="list-group-item">
+				<i class="fa fa-twitter"></i> Twitter </a>
+			</div>
+		</div>
+	</div>
+
+</div>
