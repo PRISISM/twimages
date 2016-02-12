@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   # protect_from_forgery with: :exception
 
-  before_filter :load
+  before_filter :loader
 
   def index
   end
@@ -16,11 +16,8 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def load
+  def loader
   	load 'config/initializers/twitter_credentials.rb'
   end
-
-
-end
 
 end
