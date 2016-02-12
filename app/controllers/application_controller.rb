@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   # protect_from_forgery with: :exception
 
-  # before_filter :authorize
+  before_filter :load
 
   def index
   end
@@ -14,16 +14,13 @@ class ApplicationController < ActionController::Base
   	end
   end
 
-#   private
+  private
 
-#   def authorize
-# 	$twitter = Twitter::REST::Client.new do |config|
-# 	  config.consumer_key = 'UnS4RLlfnA8jSqckNYzYReu5W'
-# 	  config.consumer_secret = 'o8MHGErwcmJMH7lNoqOq8XP1BweuL2V4oBkIhwcfMrrIzFBZGO'
-# 	  config.access_token = '74698390-UfUN9Dt5gauPWVjYjKP1xrH3n980lCJvKxkgX5vfZ'
-# 	  config.access_token_secret = 'pXb9yokpH9Y8pwdz4g6EXM035NJORfRQAnMiAaSRouUkd'
-# 	end
+  def load
+  	load 'config/initializers/twitter_credentials.rb'
+  end
 
-# end
+
+end
 
 end
