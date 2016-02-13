@@ -7,13 +7,41 @@ class ApplicationController < ActionController::Base
   end
 
   def create
+
   	if (params[:name][0] == '@') 
   		params[:name] = params[:name][1..-1]
   	end
 
     if !valid(params[:name])
-      flash[:notice] = "You have entered an invalid Twitter name."
-      redirect_to root_url
+      flash[:notice] = 
+      "You have entered an invalid Twitter name."
+      return redirect_to :action => 'index'
+    end
+
+    if ($twitter.user(params[:name]).protected?)
+      flash[:notice] = 
+      "This Twitter account is protected."
+      return redirect_to :action => 'index'
+    end
+
+    feedify(params[:name])
+    no_photos(@feed)
+    
+  end
+
+  private
+
+  def feedify(name)
+    @feed = $twitter.user_timeline(name) 
+    @feed = @feed.shuffle 
+    @feed.delete_if {|tweet| !tweet.media? } 
+  end
+
+  def no_photos(feed)
+    if feed.empty?
+      flash[:notice] = 
+      "This Twitter timeline has no photos to display."
+      return redirect_to :action => 'index'
     end
   end
 
